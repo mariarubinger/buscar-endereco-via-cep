@@ -6,11 +6,13 @@ class App extends Component {
   render(){
     return (
       <>
-        <td>Encontre qualquer endereço do Brasil digitando o CEP</td>
+        <td>Encontre qualquer endereço do Brasil</td>
         <BuscarEndereco />
       </>
     );
   }
 }
+
+
 
 export default App;
