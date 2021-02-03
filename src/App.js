@@ -11,8 +11,6 @@ class App extends Component {
       <>
         <td>Encontre qualquer endereço do Brasil</td>
           <BuscarEndereco />
-   
-         {/*  <List /> */}
       </>
     );
   }
