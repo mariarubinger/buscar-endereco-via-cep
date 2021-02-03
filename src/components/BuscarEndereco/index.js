@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function BuscarEndereco() {
   const [cep, setCep] = useState(""); //useState é um hook, o useState devolve um array com dois elementos
@@ -29,5 +29,6 @@ function BuscarEndereco() {
     </form>
   );
 }
+
 
 export default BuscarEndereco;
