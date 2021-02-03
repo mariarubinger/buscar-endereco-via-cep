@@ -1,9 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 function BuscarEndereco() {
   const [cep, setCep] = useState(""); //useState é um hook, o useState devolve um array com dois elementos
   //cep vai ser a primeira variável que representa o estado
   //setCep  vai ser a função que eu quero que ele use para ajustar aquele estado, para configurar ou atribuir um novo estado àquela variável
+  const [informacoes, setInformacoes] = useState({
+    cep: '',
+    logradouro: '',
+    complemento: '',
+    bairro: '',
+    localidade: '',
+    uf: '',
+  });
+
+  const getInformacoes = () => {
+    axios.get(`http://viacep.com.br/ws/${cep}/json/`)
+      .then(response => setInformacoes(response.data))
+
+    };
+
+/* 
+  const getInformacoes = () => {
+    axios.get(`http://viacep.com.br/ws/${cep}/json/`)
+    .then(response => response.json() 
+      .then(response => {
+        setInformacoes(response.data)
+      }))
+     // .catch(() => { console.log('Erro'); });
+    }
+/* 
+    componentDidMount() {
+      this.refresh()
+  } */
+
 
   return (
     <form
@@ -14,7 +44,7 @@ function BuscarEndereco() {
     >
       <label>
         <input
-          onChange={(event) => { //
+          onChange={(event) => {
             setCep(event.target.value); //atribuindo meu estado ao valor do evento
           }}
           type="text"
@@ -22,13 +52,23 @@ function BuscarEndereco() {
           placeholder="Digite seu CEP"
         />
       </label>
-      <input
+      <button
         type="submit"
         value="Encontrar"
-      />
+        onClick={getInformacoes}>
+        Encontrar
+      </button>
+
+      <ul>
+        <p>CEP: {informacoes.cep}</p>
+        <p>Logradouro: {informacoes.logradouro}</p>
+        <p>Complemento: {informacoes.complemento}</p>
+        <p>Bairro: {informacoes.bairro}</p>
+        <p>Localidade: {informacoes.localidade}</p>
+        <p>UF: {informacoes.uf}</p>
+      </ul>
     </form>
   );
 }
-
 
 export default BuscarEndereco;
