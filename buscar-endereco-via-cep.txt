@@ -1,0 +1,61 @@
+02/02/2021
+
+APLICAÇÃO:
+Encontre o endereço de qualquer lugar do Brasil digitando o CEP
+API utilizada https://viacep.com.br
+
+
+1) Criar projeto com o comando:
+npx create-react-app buscar-endereco-via-cep
+
+cd buscar-endereco-via-cep
+yarn start
+
+2) Apagar arquivos de teste.
+
+3) Criei o campo de input e button
+
+Preciso que o número digitado no input seja guardado no estado;
+
+
+Criar uma arrow function, uma função anônima dentro do meu próprio onChange.
+Então ela vai receber o evento, event, e dentro desse evento, eu vou fazer algumas coisas.
+
+Eu tenho o meu cep, que é a variável que eu posso consultar para saber qual é o estado daquela variável. E eu tenho o meu setCep, que é a função que eu posso usar para atribuir um novo valor para o meu estado, chamado cep.
+
+
+
+propriedade onChange vou criar uma nova função
+
+
+
+
+Formulário não controlado é quando não está fazendo validação nenhuma.
+
+
+
+Comando:
+npm install --save axios
+
+Usei os seguintes Comandos:
+npm install axios
+npm install react
+npm install prop-types
+
+
+
+3) Fazer o comando para utilizar Material UI:
+npm install @material-ui/core
+
+npm uninstall @material-ui/core
+
+npm install
+
+npm start 
+
+4) Estilização - Styled Comoponents
+
+Comando:
+npm install --save styled-components
+
+ 

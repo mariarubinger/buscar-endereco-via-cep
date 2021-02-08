@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import { TextField, Button, Typography } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import MapOutlinedIcon from '@material-ui/icons/MapOutlined';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import CepMask from '../CepMask/index';
+
+import {
+  CardContainer,
+  TitleContainer,
+  Title,
+  IconeContainer,
+  MessageContainer,
+  ResultsContainer,
+  ItemContainer,
+  Container,
+ InputContainer,
+ Input,
+ ButtonContainer,
+ Button,
+} from './styles';
 
 function BuscarEndereco() {
 
@@ -39,6 +55,7 @@ function BuscarEndereco() {
   });
   const [showResults, setShowResults] = useState("hidden");
   const [showMessage, setShowMessage] = useState("hidden");
+  const [showMessageServIndisponivel, setShowMessageServIndisponivel] = useState("hidden");
   const [showHeader, setShowHeader] = useState("show");
 
   const getInformacoes = () => {
@@ -48,29 +65,30 @@ function BuscarEndereco() {
       .then(response => {
         //console.log(response.data)
         if(response.data.erro){
-          const html = (
+      /*     const html = (
           <div>
             CEP inválido
           </div>
-        );
+        ); */
         setShowResults('hidden');
         setShowMessage('show');
-        setShowHeader('show');
-        ReactDOM.render(html,document.getElementById('message'));
+        setShowHeader('hidden');
+        //ReactDOM.render(document.getElementById('message'));
         } else{
           setShowResults('show');
           setShowMessage('hidden');
           setShowHeader('hidden');
-          setInformacoes(response.data)
+          setInformacoes(response.data);
         }
       })
       .catch((e) => { 
-        const html = (
+       /*  const html = (
           <div>
             Serviço indisponível
           </div>
-        );
-        ReactDOM.render(html,document.getElementById('message'));
+        ); */
+        //ReactDOM.render(document.getElementById('message'));
+        setShowMessageServIndisponivel('show');
         
       });
       }else{
@@ -82,15 +100,15 @@ function BuscarEndereco() {
     };
  
   return (
-    <div>
-      <div className="box">
+    <Container>
+      <CardContainer>    
+        
         <div className={showHeader}>
+          <IconeContainer>
           <MapOutlinedIcon style={{ fontSize: 60 }} justify-content="center" color="secondary" />
-            <Typography variant="h5" component="h1" align="center">              
-              Encontramos qualquer endereço do Brasil 
-            </Typography>
+          </IconeContainer>
+         
         </div>
-      </div>
         
         <form
           onSubmit={(event) => { //arrow function anônima
@@ -99,24 +117,27 @@ function BuscarEndereco() {
           }}
         >
           <div className={showHeader}>
-            <TextField
-              value={cep}
-              onChange={(event) => {          
-                var valueWithMask = CepMask(event.target.value)
-                  setCep(
-                    valueWithMask
-                  );                         
-                  validarCep(valueWithMask);            
-              }}
-              error={!erros.cep.valido}
-              helperText={erros.cep.texto}
-              label="CEP"          
-              placeholder="Digite seu CEP"
-              variant="outlined"          
-              margin="normal"
-              fullWidth                  
-            />
-              
+            <InputContainer>
+              <TextField
+                value={cep}
+                onChange={(event) => {          
+                  var valueWithMask = CepMask(event.target.value)
+                    setCep(
+                      valueWithMask
+                    );                         
+                    validarCep(valueWithMask);            
+                }}
+                error={!erros.cep.valido}
+                helperText={erros.cep.texto}
+                //label="Digite seu CEP"          
+                placeholder="Digite seu CEP"
+                variant="outlined"          
+                margin="normal"
+                fullWidth                  
+              />
+            </InputContainer>
+            
+            <ButtonContainer>
             <Button
               type="submit"
               variant="contained"
@@ -125,34 +146,99 @@ function BuscarEndereco() {
               onClick={getInformacoes}>
                 Encontrar
             </Button>
+            </ButtonContainer>
+            
+            <TitleContainer>
+              <Title>
+                <p>Encontramos qualquer endereço do Brasil :)</p>
+              </Title>
+            </TitleContainer>
           </div>
         </form>
 
-        <div id="message" className={showMessage}></div>   
+        <MessageContainer>
+          <div id="message" className={showMessage}>
+            <p>CEP inválido.</p>
+            <p>Faça uma Nova Busca!</p>
+            <IconeContainer>
+              <SentimentVeryDissatisfiedIcon style={{ fontSize: 40 }} color="secondary" />
+            </IconeContainer>
+           </div>
+        </MessageContainer>   
+
+           <div id="message" className={showMessage}>
+            <ButtonContainer>
+              <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  onClick={novaBusca}
+                >
+                  Nova Busca
+              </Button>
+            </ButtonContainer>   
+            </div>
+
+
+            <MessageContainer>
+          <div id="message" className={showMessageServIndisponivel}>
+            <p>SERVIÇO INDISPONÍVEL!</p>
+            <IconeContainer>
+              <SentimentVeryDissatisfiedIcon style={{ fontSize: 40 }} color="secondary" />
+            </IconeContainer>
+           </div>
+        </MessageContainer>   
+
+           <div id="message" className={showMessageServIndisponivel}>
+            <ButtonContainer>
+              <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  onClick={novaBusca}
+                >
+                  Nova Busca
+              </Button>
+            </ButtonContainer>   
+            </div>
+
+
+        <ResultsContainer>
           <div className={showResults}>
             <ul>
-              <p>CEP: {informacoes.cep}</p>
-              <p>Logradouro: {informacoes.logradouro}</p>
-              <p>Complemento: {informacoes.complemento}</p>
-              <p>Bairro: {informacoes.bairro}</p>
-              <p>Localidade: {informacoes.localidade}</p>
-              <p>UF: {informacoes.uf}</p>
+              <strong>CEP:</strong> <value>{informacoes.cep}</value>
+              <br></br><br></br>
+              <strong>Logradouro:</strong> <value>{informacoes.logradouro}</value>
+              <br></br><br></br>
+              <strong>Complemento:</strong> <value>{informacoes.complemento}</value>
+              <br></br><br></br>
+              <strong>Bairro:</strong> <value>{informacoes.bairro}</value>
+              <br></br><br></br>
+              <strong>Localidade:</strong> <value>{informacoes.localidade}</value>
+              <br></br><br></br>
+              <strong>UF:</strong> <value>{informacoes.uf}</value>
             </ul>
+            </div>
+ 
+        </ResultsContainer>    
 
-            <Button
-              type="submit"
-              variant="contained"
-              color="secondary"
-              // value="Encontrar"
-              onClick={novaBusca}
-            >
-              Nova Busca
-            </Button>
-          </div>
+        <div className={showResults}>
+            <ButtonContainer>
+              <Button
+                type="submit"
+                variant="contained"
+                color="secondary"
+                onClick={novaBusca}
+              >
+                Nova Busca
+              </Button>
+            </ButtonContainer>
         </div>
-        //</Box>          
+  
 
-    );
-  }
+      </CardContainer>    
+   </Container>  
+  );
+}
 
 export default BuscarEndereco;
