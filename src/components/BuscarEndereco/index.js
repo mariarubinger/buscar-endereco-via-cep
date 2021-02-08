@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { TextField, Button } from '@material-ui/core';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import CepMask from '../CepMask/index';
-import {Typography} from "@material-ui/core";
+import { TextField, Button, Typography } from '@material-ui/core';
 import MapOutlinedIcon from '@material-ui/icons/MapOutlined';
+import CepMask from '../CepMask/index';
 
 function BuscarEndereco() {
 
@@ -12,9 +11,9 @@ function BuscarEndereco() {
     
     var ehValido = {valido:true, texto:""};  
       if(cep.length !== 9){        
-         ehValido = {valido:false, texto:"O CEP deve ter 8 dígitos."}
+        ehValido = {valido:false, texto:"O CEP deve ter 8 dígitos."}
       }else{
-         ehValido = {valido:true, texto:""}
+        ehValido = {valido:true, texto:""}
       }
       setErros({cep:ehValido})
       return ehValido;
@@ -26,12 +25,11 @@ function BuscarEndereco() {
     setShowMessage('hidden');   
   }
   
-  
   const [cep, setCep] = useState(""); //useState é um hook, o useState devolve um array com dois elementos
     //cep vai ser a primeira variável que representa o estado
     //setCep  vai ser a função que eu quero que ele use para ajustar aquele estado, para configurar ou atribuir um novo estado àquela variável
-    const [erros, setErros] = useState({cep:{valido:true, texto:""}});
-    const [informacoes, setInformacoes] = useState({
+  const [erros, setErros] = useState({cep:{valido:true, texto:""}});
+  const [informacoes, setInformacoes] = useState({
     cep: '',
     logradouro: '',
     complemento: '',
@@ -39,15 +37,11 @@ function BuscarEndereco() {
     localidade: '',
     uf: '',
   });
-
   const [showResults, setShowResults] = useState("hidden");
   const [showMessage, setShowMessage] = useState("hidden");
   const [showHeader, setShowHeader] = useState("show");
 
-  
   const getInformacoes = () => {
-
-
     var verificacao = validarCep(cep);
     if(verificacao.valido === true){
     axios.get(`http://viacep.com.br/ws/${cep}/json/`)
@@ -58,7 +52,6 @@ function BuscarEndereco() {
           <div>
             CEP inválido
           </div>
-          
         );
         setShowResults('hidden');
         setShowMessage('show');
@@ -88,57 +81,56 @@ function BuscarEndereco() {
       //.catch((e) => { console.log(e); });
     };
  
-
   return (
     <div>
+      <div className="box">
         <div className={showHeader}>
-          <MapOutlinedIcon style={{ fontSize: 60 }} color="secondary" />
-          <Typography variant="h5" component="h1" align="center">              
-            Encontramos qualquer endereço do Brasil 
-          </Typography>
+          <MapOutlinedIcon style={{ fontSize: 60 }} justify-content="center" color="secondary" />
+            <Typography variant="h5" component="h1" align="center">              
+              Encontramos qualquer endereço do Brasil 
+            </Typography>
         </div>
-      <form
-        onSubmit={(event) => { //arrow function anônima
-          event.preventDefault(); //para prevenir o comportamento padrão do meu evento de Submit que é recarregar a página
-          // console.log({ cep });
-        }}
+      </div>
+        
+        <form
+          onSubmit={(event) => { //arrow function anônima
+            event.preventDefault(); //para prevenir o comportamento padrão do meu evento de Submit que é recarregar a página
+            // console.log({ cep });
+          }}
         >
           <div className={showHeader}>
-              <TextField
-                  value={cep}
-                  onChange={(event) => {          
-                    var valueWithMask = CepMask(event.target.value)
-                    setCep(
-                      valueWithMask
-                    );                         
-                    validarCep(valueWithMask); 
-                              
-                  }}
-                  error={!erros.cep.valido}
-                  helperText={erros.cep.texto}
-                  label="CEP"          
-                  placeholder="Digite seu CEP"
-                  variant="outlined"          
-                  margin="normal"
-                  fullWidth                  
-                />
-            
-              <Button
-                type="submit"
-                variant="contained"
-                color="secondary"
+            <TextField
+              value={cep}
+              onChange={(event) => {          
+                var valueWithMask = CepMask(event.target.value)
+                  setCep(
+                    valueWithMask
+                  );                         
+                  validarCep(valueWithMask);            
+              }}
+              error={!erros.cep.valido}
+              helperText={erros.cep.texto}
+              label="CEP"          
+              placeholder="Digite seu CEP"
+              variant="outlined"          
+              margin="normal"
+              fullWidth                  
+            />
+              
+            <Button
+              type="submit"
+              variant="contained"
+              color="secondary"
               // value="Encontrar"
-                onClick={getInformacoes}>
+              onClick={getInformacoes}>
                 Encontrar
-              </Button>
-            </div>
-      </form>
+            </Button>
+          </div>
+        </form>
 
-
-      <div id="message" className={showMessage}>
-      </div>   
-        <div className={showResults}>
-            <ul >
+        <div id="message" className={showMessage}></div>   
+          <div className={showResults}>
+            <ul>
               <p>CEP: {informacoes.cep}</p>
               <p>Logradouro: {informacoes.logradouro}</p>
               <p>Complemento: {informacoes.complemento}</p>
@@ -148,17 +140,19 @@ function BuscarEndereco() {
             </ul>
 
             <Button
-                type="submit"
-                variant="contained"
-                color="secondary"
+              type="submit"
+              variant="contained"
+              color="secondary"
               // value="Encontrar"
-                onClick={novaBusca}>
-                Nova Busca
-              </Button>
-        
-      </div>
-     </div>
-  );
-}
+              onClick={novaBusca}
+            >
+              Nova Busca
+            </Button>
+          </div>
+        </div>
+        //</Box>          
+
+    );
+  }
 
 export default BuscarEndereco;
