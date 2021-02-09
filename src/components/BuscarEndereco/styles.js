@@ -3,12 +3,15 @@ import styled from 'styled-components';
 export const Container = styled.div`
   justify-content: center;
   display: flex;
-  padding: 40px;
+  padding: 80px;
+  justify-items: center;
+  margin: 0;
+  box-sizing: border-box;
 `;
 
 export const CardContainer = styled.div`
-  height: 70vh;
-  width: 60vh;
+  height: 350px;
+  width: 300px;
   background-color: #FFFFFF;
   border-radius: 5px;
   box-shadow: 1px 1px 3px #000000;
@@ -16,29 +19,36 @@ export const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   justify-items: center;
+  padding: 20px 20px;
+  margin: 20px 20px;
 `;
 
 export const IconeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px ;
 `;
 
 export const InputContainer = styled.div`
-  padding: 40px;
-  margin-top: -80px;
+  margin-top: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //justify-items: center;
+ // justify-content: space-around;
+  //height: 40px; 
 `;
  
 export const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-around;
-  margin-top: -50px;
+  justify-content: center;
 `;
 
 export const Button = styled.div`
   padding: 16.5px 14px;
-  width: 70%;
+  width: 150px;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   text-align: center;
   color: #fff;
@@ -70,13 +80,14 @@ export const Title = styled.p`
 
 export const MessageContainer = styled.div`
   display: flex;
-  margin-top: -70px;
+ // margin-top: 30px;
+ align-items: center;
   justify-content: center;
 `;
 
 export const ResultsContainer = styled.text`
-  margin-top: -130px;
+  //margin-top: -130px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
 `;

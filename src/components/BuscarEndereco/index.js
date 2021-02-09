@@ -4,15 +4,14 @@ import { TextField } from '@material-ui/core';
 import MapOutlinedIcon from '@material-ui/icons/MapOutlined';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import CepMask from '../CepMask/index';
-
 import {
+  Container,
   CardContainer,
   TitleContainer,
   Title,
   IconeContainer,
   MessageContainer,
   ResultsContainer,
-  Container,
   InputContainer,
   ButtonContainer,
   Button,
@@ -134,9 +133,11 @@ function BuscarEndereco() {
                 helperText={erros.cep.texto}
                 //label="Digite seu CEP"          
                 placeholder="Digite seu CEP"
-                variant="outlined"          
-                margin="normal"
-                fullWidth                  
+                variant="outlined"  
+                justify-content= "center" 
+                justify-align="center"      
+                //margin="normal"
+                //fullWidth                  
               />
             </InputContainer>
             
@@ -239,7 +240,8 @@ function BuscarEndereco() {
   
 
       </CardContainer>    
-   </Container>  
+    </Container>  
+
   );
 }
 
