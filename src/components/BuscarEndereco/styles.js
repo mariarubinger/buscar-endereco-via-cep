@@ -22,11 +22,9 @@ export const IconeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //padding-top: 30px;
 `;
 
 export const InputContainer = styled.div`
-  //padding-top: 50px;
   padding: 40px;
   margin-top: -80px;
 `;

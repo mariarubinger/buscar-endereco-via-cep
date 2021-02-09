@@ -13,12 +13,10 @@ import {
   IconeContainer,
   MessageContainer,
   ResultsContainer,
-  ItemContainer,
   Container,
- InputContainer,
- Input,
- ButtonContainer,
- Button,
+  InputContainer,
+  ButtonContainer,
+  Button,
 } from './styles';
 
 function BuscarEndereco() {
