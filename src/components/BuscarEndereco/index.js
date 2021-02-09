@@ -36,6 +36,7 @@ function BuscarEndereco() {
     setShowHeader('show');
     setShowResults('hidden');
     setShowMessage('hidden');   
+    setShowMessageServIndisponivel('hidden');
   }
   
   const [cep, setCep] = useState(""); //useState é um hook, o useState devolve um array com dois elementos
@@ -91,12 +92,12 @@ function BuscarEndereco() {
         setShowMessage('hidden');
         setShowHeader('hidden');
         setShowMessageServIndisponivel('show');
-        
       });
       }else{
         setShowHeader('show');
         setShowResults('hidden');
         setShowMessage('hidden');    
+        setShowMessageServIndisponivel('hidden');
       }
       //.catch((e) => { console.log(e); });
     };
@@ -183,15 +184,15 @@ function BuscarEndereco() {
 
 
             <MessageContainer>
-          <div id="message" className={showMessageServIndisponivel}>
-            <p>SERVIÇO INDISPONÍVEL!</p>
-            <IconeContainer>
-              <SentimentVeryDissatisfiedIcon style={{ fontSize: 40 }} color="secondary" />
-            </IconeContainer>
-           </div>
-        </MessageContainer>   
+              <div className={showMessageServIndisponivel}>
+                <p>SERVIÇO INDISPONÍVEL</p>
+              <IconeContainer>
+                <SentimentVeryDissatisfiedIcon style={{ fontSize: 40 }} color="secondary" />
+              </IconeContainer>
+              </div>
+            </MessageContainer>   
 
-           <div id="message" className={showMessageServIndisponivel}>
+          <div className={showMessageServIndisponivel}>
             <ButtonContainer>
               <Button
                   type="submit"
@@ -202,8 +203,7 @@ function BuscarEndereco() {
                   Nova Busca
               </Button>
             </ButtonContainer>   
-            </div>
-
+          </div>
 
         <ResultsContainer>
           <div className={showResults}>
