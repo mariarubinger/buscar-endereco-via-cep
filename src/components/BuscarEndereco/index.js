@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import ReactDOM from 'react-dom';
 import { TextField } from '@material-ui/core';
 import MapOutlinedIcon from '@material-ui/icons/MapOutlined';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
