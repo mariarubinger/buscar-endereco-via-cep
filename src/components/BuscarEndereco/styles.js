@@ -19,8 +19,8 @@ export const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   justify-items: center;
-  padding: 20px 20px;
-  margin: 20px 20px;
+  padding: 15px 15px;
+  margin: 15px 15px;
 `;
 
 export const IconeContainer = styled.div`
@@ -80,14 +80,13 @@ export const Title = styled.p`
 
 export const MessageContainer = styled.div`
   display: flex;
- // margin-top: 30px;
- align-items: center;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 `;
 
-export const ResultsContainer = styled.text`
-  //margin-top: -130px;
+export const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  //margin-bottom: 10px;
+  padding-left: 15px;
 `;

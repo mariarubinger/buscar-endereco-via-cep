@@ -183,7 +183,6 @@ function BuscarEndereco() {
             </ButtonContainer>   
             </div>
 
-
             <MessageContainer>
               <div className={showMessageServIndisponivel}>
                 <p>SERVIÇO INDISPONÍVEL</p>
@@ -208,7 +207,7 @@ function BuscarEndereco() {
 
         <ResultsContainer>
           <div className={showResults}>
-            <ul>
+            <div>
               <strong>CEP:</strong> <value>{informacoes.cep}</value>
               <br></br><br></br>
               <strong>Logradouro:</strong> <value>{informacoes.logradouro}</value>
@@ -220,9 +219,8 @@ function BuscarEndereco() {
               <strong>Localidade:</strong> <value>{informacoes.localidade}</value>
               <br></br><br></br>
               <strong>UF:</strong> <value>{informacoes.uf}</value>
-            </ul>
             </div>
- 
+          </div>
         </ResultsContainer>    
 
         <div className={showResults}>
@@ -237,8 +235,6 @@ function BuscarEndereco() {
               </Button>
             </ButtonContainer>
         </div>
-  
-
       </CardContainer>    
     </Container>  
 
