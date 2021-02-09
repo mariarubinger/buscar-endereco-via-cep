@@ -70,11 +70,13 @@ function BuscarEndereco() {
         setShowResults('hidden');
         setShowMessage('show');
         setShowHeader('hidden');
+        setShowMessageServIndisponivel('hidden');
         //ReactDOM.render(document.getElementById('message'));
         } else{
           setShowResults('show');
           setShowMessage('hidden');
           setShowHeader('hidden');
+          setShowMessageServIndisponivel('hidden');
           setInformacoes(response.data);
         }
       })
@@ -86,7 +88,8 @@ function BuscarEndereco() {
         ); */
         //ReactDOM.render(document.getElementById('message'));
         setShowResults('hidden');
-        setShowMessage('show');
+        setShowMessage('hidden');
+        setShowHeader('hidden');
         setShowMessageServIndisponivel('show');
         
       });
