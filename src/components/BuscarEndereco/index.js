@@ -58,7 +58,7 @@ function BuscarEndereco() {
   const getInformacoes = () => {
     var verificacao = validarCep(cep);
     if(verificacao.valido === true){
-    axios.get(`http://viacep.com.br/ws/${cep}/json/`)
+    axios.get(`https://viacep.com.br/ws/${cep}/json/`)
       .then(response => {
         //console.log(response.data)
         if(response.data.erro){
@@ -85,6 +85,8 @@ function BuscarEndereco() {
           </div>
         ); */
         //ReactDOM.render(document.getElementById('message'));
+        setShowResults('hidden');
+        setShowMessage('show');
         setShowMessageServIndisponivel('show');
         
       });
