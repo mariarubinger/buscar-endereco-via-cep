@@ -20,7 +20,6 @@ import {
 function BuscarEndereco() {
 
   function validarCep(cep){
-    
     var ehValido = {valido:true, texto:""};  
       if(cep.length !== 9){        
         ehValido = {valido:false, texto:"O CEP deve ter 8 dígitos."}
@@ -54,11 +53,14 @@ function BuscarEndereco() {
   const [showMessage, setShowMessage] = useState("hidden");
   const [showMessageServIndisponivel, setShowMessageServIndisponivel] = useState("hidden");
   const [showHeader, setShowHeader] = useState("show");
-/*   const [loading, setLoading] = useState(false); */
+  const [loading, setLoading] = useState("hidden");
 
   const getInformacoes = () => {
     var verificacao = validarCep(cep);
     if(verificacao.valido === true){
+      setLoading('show');
+      setShowHeader('hidden');
+      setShowMessageServIndisponivel('hidden');
     axios.get(`https://viacep.com.br/ws/${cep}/json/`)
 
     .then(response => {
@@ -72,14 +74,11 @@ function BuscarEndereco() {
 
         setShowResults('hidden');
         setShowMessage('show');
-        setShowHeader('hidden');
-        setShowMessageServIndisponivel('hidden');
+    
         //ReactDOM.render(document.getElementById('message'));
         } else{
           setShowResults('show');
           setShowMessage('hidden');
-          setShowHeader('hidden');
-          setShowMessageServIndisponivel('hidden');
           setInformacoes(response.data);
         }
       })
@@ -133,13 +132,11 @@ function BuscarEndereco() {
                     validarCep(valueWithMask);            
                 }}
                 error={!erros.cep.valido}
-                helperText={erros.cep.texto}
-                //label="Digite seu CEP"          
+                helperText={erros.cep.texto}      
                 placeholder="Digite seu CEP"
                 variant="outlined"  
                 justify-content= "center" 
                 justify-align="center"      
-                //margin="normal"
                 //fullWidth                  
               />
             </InputContainer>
