@@ -54,11 +54,15 @@ function BuscarEndereco() {
   const [showMessage, setShowMessage] = useState("hidden");
   const [showMessageServIndisponivel, setShowMessageServIndisponivel] = useState("hidden");
   const [showHeader, setShowHeader] = useState("show");
-/*   const [loading, setLoading] = useState(false); */
+  const [loading, setLoading] = useState("hidden"); 
 
-  const getInformacoes = () => {
+  const getInformacoes = () => {    
     var verificacao = validarCep(cep);
     if(verificacao.valido === true){
+      setLoading('show');
+      setShowHeader('hidden');
+      setShowMessageServIndisponivel('hidden');   
+
     axios.get(`https://viacep.com.br/ws/${cep}/json/`)
 
     .then(response => {
@@ -71,16 +75,17 @@ function BuscarEndereco() {
         ); */
 
         setShowResults('hidden');
-        setShowMessage('show');
-        setShowHeader('hidden');
-        setShowMessageServIndisponivel('hidden');
-        //ReactDOM.render(document.getElementById('message'));
+        setShowMessage('show');              
+        setLoading('hidden')
+        //ReactDOM.render(document.getElementById('message'));        
         } else{
-          setShowResults('show');
-          setShowMessage('hidden');
-          setShowHeader('hidden');
-          setShowMessageServIndisponivel('hidden');
-          setInformacoes(response.data);
+          setShowMessage('hidden'); 
+          setTimeout( () => {
+            setShowResults('show');                        
+            setInformacoes(response.data);
+            setLoading('hidden')
+          },2000);
+          
         }
       })
       .catch((e) => { 
@@ -94,6 +99,7 @@ function BuscarEndereco() {
         setShowMessage('hidden');
         setShowHeader('hidden');
         setShowMessageServIndisponivel('show');
+        setLoading('hidden')
       });
       }else{
         setShowHeader('show');
@@ -101,7 +107,8 @@ function BuscarEndereco() {
         setShowMessage('hidden');    
         setShowMessageServIndisponivel('hidden');
       }
-      //.catch((e) => { console.log(e); });
+      
+        
     };
  
   return (
@@ -121,6 +128,10 @@ function BuscarEndereco() {
             // console.log({ cep });
           }}
         >
+        <div className={loading}>
+          Aguarde... carregando!
+        </div>
+
           <div className={showHeader}>
             <InputContainer>
               <TextField
