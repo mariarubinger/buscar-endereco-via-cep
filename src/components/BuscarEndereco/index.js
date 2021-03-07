@@ -54,12 +54,14 @@ function BuscarEndereco() {
   const [showMessage, setShowMessage] = useState("hidden");
   const [showMessageServIndisponivel, setShowMessageServIndisponivel] = useState("hidden");
   const [showHeader, setShowHeader] = useState("show");
+/*   const [loading, setLoading] = useState(false); */
 
   const getInformacoes = () => {
     var verificacao = validarCep(cep);
     if(verificacao.valido === true){
     axios.get(`https://viacep.com.br/ws/${cep}/json/`)
-      .then(response => {
+
+    .then(response => {
         //console.log(response.data)
         if(response.data.erro){
       /*     const html = (
@@ -67,6 +69,7 @@ function BuscarEndereco() {
             CEP inválido
           </div>
         ); */
+
         setShowResults('hidden');
         setShowMessage('show');
         setShowHeader('hidden');
@@ -107,7 +110,7 @@ function BuscarEndereco() {
         
         <div className={showHeader}>
           <IconeContainer>
-          <MapOutlinedIcon style={{ fontSize: 60 }} justify-content="center" color="secondary" />
+          <MapOutlinedIcon style={{ fontSize: 60 }} justifycont-ent="center" color="secondary" />
           </IconeContainer>
          
         </div>
