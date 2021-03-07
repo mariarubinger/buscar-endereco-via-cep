@@ -4,6 +4,7 @@ import { TextField } from '@material-ui/core';
 import MapOutlinedIcon from '@material-ui/icons/MapOutlined';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import CepMask from '../CepMask/index';
+import imageLoading from '../../assets/img/loading.gif';
 import {
   Container,
   CardContainer,
@@ -15,6 +16,7 @@ import {
   InputContainer,
   ButtonContainer,
   Button,
+  Loading,
 } from './styles';
 
 function BuscarEndereco() {
@@ -37,9 +39,7 @@ function BuscarEndereco() {
     setShowMessageServIndisponivel('hidden');
   }
   
-  const [cep, setCep] = useState(""); //useState é um hook, o useState devolve um array com dois elementos
-    //cep vai ser a primeira variável que representa o estado
-    //setCep  vai ser a função que eu quero que ele use para ajustar aquele estado, para configurar ou atribuir um novo estado àquela variável
+  const [cep, setCep] = useState("");
   const [erros, setErros] = useState({cep:{valido:true, texto:""}});
   const [informacoes, setInformacoes] = useState({
     cep: '',
@@ -61,38 +61,29 @@ function BuscarEndereco() {
       setLoading('show');
       setShowHeader('hidden');
       setShowMessageServIndisponivel('hidden');
+
     axios.get(`https://viacep.com.br/ws/${cep}/json/`)
 
     .then(response => {
-        //console.log(response.data)
         if(response.data.erro){
-      /*     const html = (
-          <div>
-            CEP inválido
-          </div>
-        ); */
-
         setShowResults('hidden');
         setShowMessage('show');
-    
-        //ReactDOM.render(document.getElementById('message'));
+        setLoading('hidden');
         } else{
-          setShowResults('show');
-          setShowMessage('hidden');
-          setInformacoes(response.data);
+          setShowMessage('hidden'); 
+          setTimeout( () => {
+            setShowResults('show');                        
+            setInformacoes(response.data);
+            setLoading('hidden')
+          },2000);
         }
       })
       .catch((e) => { 
-       /*  const html = (
-          <div>
-            Serviço indisponível
-          </div>
-        ); */
-        //ReactDOM.render(document.getElementById('message'));
         setShowResults('hidden');
         setShowMessage('hidden');
         setShowHeader('hidden');
         setShowMessageServIndisponivel('show');
+        setLoading('hidden')
       });
       }else{
         setShowHeader('show');
@@ -100,26 +91,29 @@ function BuscarEndereco() {
         setShowMessage('hidden');    
         setShowMessageServIndisponivel('hidden');
       }
-      //.catch((e) => { console.log(e); });
     };
  
   return (
     <Container>
       <CardContainer>    
-        
         <div className={showHeader}>
           <IconeContainer>
-          <MapOutlinedIcon style={{ fontSize: 60 }} justifycont-ent="center" color="secondary" />
+            <MapOutlinedIcon style={{ fontSize: 60 }} justify-content="center" color="secondary" />
           </IconeContainer>
-         
         </div>
         
         <form
-          onSubmit={(event) => { //arrow function anônima
-            event.preventDefault(); //para prevenir o comportamento padrão do meu evento de Submit que é recarregar a página
-            // console.log({ cep });
+          onSubmit={(event) => { // arrow function anônima
+            event.preventDefault(); // para prevenir o comportamento padrão do meu evento de Submit que é recarregar a página
           }}
         >
+
+        <Loading>
+          <div className={loading}>
+            <img src={imageLoading} />
+          </div>
+        </Loading>
+     
           <div className={showHeader}>
             <InputContainer>
               <TextField
@@ -136,8 +130,7 @@ function BuscarEndereco() {
                 placeholder="Digite seu CEP"
                 variant="outlined"  
                 justify-content= "center" 
-                justify-align="center"      
-                //fullWidth                  
+                justify-align="center"                     
               />
             </InputContainer>
             
@@ -146,7 +139,6 @@ function BuscarEndereco() {
               type="submit"
               variant="contained"
               color="secondary"
-              // value="Encontrar"
               onClick={getInformacoes}>
                 Encontrar
             </Button>
@@ -155,6 +147,7 @@ function BuscarEndereco() {
             <TitleContainer>
               <Title>
                 <p>Encontramos qualquer endereço do Brasil :)</p>
+                <p>Exemplo: 72015-180</p>
               </Title>
             </TitleContainer>
           </div>
@@ -237,7 +230,6 @@ function BuscarEndereco() {
         </div>
       </CardContainer>    
     </Container>  
-
   );
 }
 

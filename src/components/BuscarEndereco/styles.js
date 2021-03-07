@@ -30,6 +30,13 @@ export const IconeContainer = styled.div`
   padding: 30px ;
 `;
 
+export const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+
 export const InputContainer = styled.div`
   margin-top: inherit;
   display: flex;
