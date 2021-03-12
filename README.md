@@ -5,6 +5,8 @@ API utilizada: https://viacep.com.br
 
 ## Preview Desktop
 
+![buscar-endereco-via-cep](https://user-images.githubusercontent.com/66969881/110958022-22375b00-8344-11eb-979c-d9ce9490c134.png)
+
 
 ## Cloning project
 
