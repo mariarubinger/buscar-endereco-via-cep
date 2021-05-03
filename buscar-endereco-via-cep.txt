@@ -60,7 +60,7 @@ npm install --save styled-components
 
  
 Quando DESINSTALA uma dependência do package json
-você deve fazer o update oy seja, realizar o
+você deve fazer o update, ou seja, realizar o
 comando yarn install
 
 

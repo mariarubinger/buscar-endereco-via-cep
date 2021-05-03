@@ -36,15 +36,11 @@ export const Loading = styled.div`
   align-items: center;
 `;
 
-
 export const InputContainer = styled.div`
   margin-top: inherit;
   display: flex;
   flex-direction: column;
   align-items: center;
-  //justify-items: center;
- // justify-content: space-around;
-  //height: 40px; 
 `;
  
 export const ButtonContainer = styled.div`
